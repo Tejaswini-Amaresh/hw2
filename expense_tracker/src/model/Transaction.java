@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 public class Transaction {
-
-  public double amount;
-  public String category;
-  public String timestamp;
-  public Color color;
+  //Preventing external data modification by making variables private final
+  private final double amount;
+  private final String category;
+  private final String timestamp;
+  private Color color;
 
   public Transaction(double amount, String category) {
     this.amount = amount;
@@ -22,18 +22,18 @@ public class Transaction {
   public double getAmount() {
     return amount;
   }
-
-  public void setAmount(double amount) {
-    this.amount = amount;
-  }
+  //excluding setting methods 
+  // public void setAmount(double amount) {
+  //   this.amount = amount;
+  // }
 
   public String getCategory() {
     return category;
   }
 
-  public void setCategory(String category) {
-    this.category = category; 
-  }
+  // public void setCategory(String category) {
+  //   this.category = category; 
+  // }
   
   public String getTimestamp() {
     return timestamp;
