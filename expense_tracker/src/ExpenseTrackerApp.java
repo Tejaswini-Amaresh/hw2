@@ -13,7 +13,7 @@ public class ExpenseTrackerApp {
     
     // Create MVC components
     ExpenseTrackerModel model = new ExpenseTrackerModel();
-    ExpenseTrackerView view = new ExpenseTrackerView(model);
+    ExpenseTrackerView view = new ExpenseTrackerView();
     ExpenseTrackerController controller = new ExpenseTrackerController(model, view);
 
     // Initialize view

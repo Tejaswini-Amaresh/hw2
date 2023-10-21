@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import javax.swing.JFormattedTextField.AbstractFormatterFactory;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -26,7 +27,7 @@ public class ExpenseTrackerView extends JFrame {
   private JTextField filterValue;
   
 
-  public ExpenseTrackerView(ExpenseTrackerModel trackerModel) {
+  public ExpenseTrackerView() {
     setTitle("Expense Tracker"); // Set title
     setSize(600, 400); // Make GUI larger
 
@@ -56,17 +57,6 @@ public class ExpenseTrackerView extends JFrame {
     JLabel filterValueLabel= new JLabel("Value");
     filterValue = new JTextField(10);
     
-    // Create table
-    transactionsTable = new JTable(model)
-    {
-			public Component prepareRenderer(TableCellRenderer renderer, int row, int column)
-			{
-				Component c = super.prepareRenderer(renderer, row, column);
-        Color color = trackerModel.getRowTransaction(row).getColor();
-				c.setBackground(color);
-				return c;
-			}
-		};
   
     // Layout components
     JPanel inputPanel = new JPanel();
@@ -102,6 +92,21 @@ public class ExpenseTrackerView extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   
+  }
+
+  public void createTransactionTable(ExpenseTrackerModel trackerModel) {
+    // Create table
+    transactionsTable = new JTable(model) 
+      {
+        public Component prepareRenderer(TableCellRenderer renderer, int row, int column)
+        {
+          Component c = super.prepareRenderer(renderer, row, column);
+          Color color = trackerModel.getRowTransaction(row).getColor();
+          c.setBackground(color);
+          return c;
+        }
+      };
+    add(new JScrollPane(transactionsTable), BorderLayout.CENTER); 
   }
 
   public void refreshTable(List<Transaction> transactions) {

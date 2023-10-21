@@ -16,7 +16,7 @@ public class ExpenseTrackerController {
   public ExpenseTrackerController(ExpenseTrackerModel model, ExpenseTrackerView view) {
     this.model = model;
     this.view = view;
-
+    view.createTransactionTable(model);
     // Set up view event handlers
   }
 
