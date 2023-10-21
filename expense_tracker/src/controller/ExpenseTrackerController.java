@@ -30,6 +30,9 @@ public class ExpenseTrackerController {
 
   }
 
+  /**
+   * Reset filter
+   */
   public void reset() {
     // Get transactions from model
     List<Transaction> transactions = model.getTransactions();
@@ -39,6 +42,10 @@ public class ExpenseTrackerController {
 
   }
 
+  /**
+   * Setting the strategy pattern for filtering the transactions
+   * @param filter
+   */
   public void setFilterStrategy(TransactionFilter filter) {
       this.transactionFilter = filter;
   }
@@ -58,6 +65,11 @@ public class ExpenseTrackerController {
     return true;
   }
   
+  /**
+   * 
+   * @return boolean to indicate successful application 
+   * of the filter
+   */
   public boolean applyFilter() {
     if (!this.transactionFilter.isValid()) {
       return false;
@@ -72,7 +84,7 @@ public class ExpenseTrackerController {
       return false;
     }
 
-    view.getTableModel().fireTableDataChanged();;
+    view.getTableModel().fireTableDataChanged();
     return true;
 
   }

@@ -20,12 +20,20 @@ public class ExpenseTrackerModel {
     transactions.remove(t);
   }
 
+  /**
+   * immutability incorporated
+   * @return
+   */
   public List<Transaction> getTransactions() {
     return Collections.unmodifiableList(transactions);
   }
  
 
-
+  /**
+   * get a particular transaction, given the row number
+   * @param row
+   * @return
+   */
   public Transaction getRowTransaction(int row) {
     if (row >= transactions.size() || transactions.isEmpty()) {
       return new Transaction(0, null);

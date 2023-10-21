@@ -6,7 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 public class Transaction {
-  //Preventing external data modification by making variables private final
+  /**
+   * Preventing external data modification by making variables private final
+   * @return
+   */
+  
   private final double amount;
   private final String category;
   private final String timestamp;
