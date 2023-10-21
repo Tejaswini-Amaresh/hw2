@@ -23,4 +23,11 @@ public class ExpenseTrackerModel {
     return transactions;
   }
 
+  public Transaction getRowTransaction(int row) {
+    if (row >= transactions.size() || transactions.isEmpty()) {
+      return new Transaction(0, null);
+    }
+    return transactions.get(row);
+  }
+
 }
