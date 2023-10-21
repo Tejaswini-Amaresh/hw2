@@ -21,6 +21,7 @@ Invalid Value filter:
 
 
 Additionally, encapsulation and immutability have been applied on the list of Transactions, adhering to the Open-Close principle.
+STrategy pattern has been applied to ensure extensibility of the filters.
 ## Compile
 
 To compile the code from terminal, use the following command:
