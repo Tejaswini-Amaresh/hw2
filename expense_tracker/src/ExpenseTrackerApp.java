@@ -2,10 +2,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ExpenseTrackerController;
+import model.AmountFilter;
+import model.CategoryFilter;
 import model.ExpenseTrackerModel;
 import view.ExpenseTrackerView;
-import model.Transaction;
-import controller.InputValidation;
 
 public class ExpenseTrackerApp {
 
@@ -13,7 +13,7 @@ public class ExpenseTrackerApp {
     
     // Create MVC components
     ExpenseTrackerModel model = new ExpenseTrackerModel();
-    ExpenseTrackerView view = new ExpenseTrackerView();
+    ExpenseTrackerView view = new ExpenseTrackerView(model);
     ExpenseTrackerController controller = new ExpenseTrackerController(model, view);
 
     // Initialize view
@@ -30,6 +30,34 @@ public class ExpenseTrackerApp {
       
       if (!added) {
         JOptionPane.showMessageDialog(view, "Invalid amount or category entered");
+        view.toFront();
+      }
+    });
+
+    view.getFilterTransactionBtn().addActionListener(e -> {
+
+      // Get filter transaction data from view
+      String filterField = view.getSelectedFilterField();
+      String filterFieldValue = view.getFilterField();
+
+      if (filterField.equals("amount")) {
+        double filterAmount = 0;
+        if(filterFieldValue.isEmpty()) {
+          filterAmount = 0;
+        } else {
+        filterAmount = Double.parseDouble(filterFieldValue);
+        controller.setFilterStrategy(new AmountFilter(filterAmount));
+        }
+      }
+      else if (filterField.equals("category")) {
+        controller.setFilterStrategy(new CategoryFilter(filterFieldValue));
+      }
+      
+      // Call controller to filter transaction
+      boolean filtered = controller.applyFilter();
+      
+      if (!filtered) {
+        JOptionPane.showMessageDialog(view, "Invalid filter amount or category entered");
         view.toFront();
       }
     });

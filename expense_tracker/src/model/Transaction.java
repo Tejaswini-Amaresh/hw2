@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,11 +10,13 @@ public class Transaction {
   private final double amount;
   private final String category;
   private final String timestamp;
+  private Color color;
 
   public Transaction(double amount, String category) {
     this.amount = amount;
     this.category = category;
     this.timestamp = generateTimestamp();
+    this.color = Color.WHITE;
   }
 
   public double getAmount() {
@@ -34,6 +37,14 @@ public class Transaction {
   
   public String getTimestamp() {
     return timestamp;
+  }
+
+  public void setColor(Color C) {
+    this.color = C;
+  }
+
+  public Color getColor() {
+    return this.color;
   }
 
   private String generateTimestamp() {

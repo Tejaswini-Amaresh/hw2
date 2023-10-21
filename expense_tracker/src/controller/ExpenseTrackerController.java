@@ -4,14 +4,14 @@ import view.ExpenseTrackerView;
 
 import java.util.List;
 
-
-
 import model.ExpenseTrackerModel;
 import model.Transaction;
+import model.TransactionFilter;
 public class ExpenseTrackerController {
   
   private ExpenseTrackerModel model;
   private ExpenseTrackerView view;
+  private TransactionFilter transactionFilter;
 
   public ExpenseTrackerController(ExpenseTrackerModel model, ExpenseTrackerView view) {
     this.model = model;
@@ -30,6 +30,19 @@ public class ExpenseTrackerController {
 
   }
 
+  public void reset() {
+    // Get transactions from model
+    List<Transaction> transactions = model.getTransactions();
+
+    // Pass to view
+    view.resetFilter(transactions);
+
+  }
+
+  public void setFilterStrategy(TransactionFilter filter) {
+      this.transactionFilter = filter;
+  }
+
   public boolean addTransaction(double amount, String category) {
     if (!InputValidation.isValidAmount(amount)) {
       return false;
@@ -45,5 +58,23 @@ public class ExpenseTrackerController {
     return true;
   }
   
+  public boolean applyFilter() {
+    if (!this.transactionFilter.isValid()) {
+      return false;
+    }
+
+    reset();
+
+    List<Transaction> allTransactions = model.getTransactions();
+    List<Transaction> filteredTransactions = this.transactionFilter.filter(allTransactions);
+    
+    if (filteredTransactions.isEmpty()) {
+      return false;
+    }
+
+    view.getTableModel().fireTableDataChanged();;
+    return true;
+
+  }
   // Other controller methods
 }
