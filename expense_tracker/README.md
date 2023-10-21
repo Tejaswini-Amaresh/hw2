@@ -5,6 +5,21 @@ The following additional features have been incorporated:
 1. Filtering transactions via Amount or Category
 2. The filtered transactions are highlighted in green
 
+User Interface snapshots:
+Amount filter:
+
+![image](https://github.com/Tejaswini-Amaresh/hw2/assets/49989159/9b616bf0-69d1-414f-b455-3fea63ab7cdf)
+
+Category filter:
+
+![image](https://github.com/Tejaswini-Amaresh/hw2/assets/49989159/1af79d10-3b30-424f-aa52-f880bfc101f9)
+
+Invalid Value filter:
+
+![image](https://github.com/Tejaswini-Amaresh/hw2/assets/49989159/f5af8119-c516-4d0c-bef2-807b56d23629)
+
+
+
 Additionally, encapsulation and immutability have been applied on the list of Transactions, adhering to the Open-Close principle.
 ## Compile
 
