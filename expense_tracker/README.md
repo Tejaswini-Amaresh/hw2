@@ -1,7 +1,11 @@
-# hw1- Manual Review
+# hw2 Design and Implementation
 
 The homework will be based on this project named "Expense Tracker",where users will be able to add/remove daily transaction. 
+The following additional features have been incorporated:
+1. Filtering transactions via Amount or Category
+2. The filtered transactions are highlighted in green
 
+Additionally, encapsulation and immutability have been applied on the list of Transactions, adhering to the Open-Close principle.
 ## Compile
 
 To compile the code from terminal, use the following command:
