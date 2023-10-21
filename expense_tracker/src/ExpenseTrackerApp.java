@@ -6,9 +6,6 @@ import model.AmountFilter;
 import model.CategoryFilter;
 import model.ExpenseTrackerModel;
 import view.ExpenseTrackerView;
-import model.Transaction;
-import model.TransactionFilter;
-import controller.InputValidation;
 
 public class ExpenseTrackerApp {
 
@@ -41,24 +38,23 @@ public class ExpenseTrackerApp {
 
       // Get filter transaction data from view
       String filterField = view.getSelectedFilterField();
-    
-      TransactionFilter filter = null;
+      String filterFieldValue = view.getFilterField();
+
       if (filterField.equals("amount")) {
         double filterAmount = 0;
-        if(view.getFilterField().isEmpty()) {
+        if(filterFieldValue.isEmpty()) {
           filterAmount = 0;
         } else {
-        filterAmount = Double.parseDouble(view.getFilterField());
-        filter = new AmountFilter(filterAmount);
+        filterAmount = Double.parseDouble(filterFieldValue);
+        controller.setFilterStrategy(new AmountFilter(filterAmount));
         }
       }
       else if (filterField.equals("category")) {
-        String category = view.getFilterField();
-        filter = new CategoryFilter(category);
+        controller.setFilterStrategy(new CategoryFilter(filterFieldValue));
       }
       
       // Call controller to filter transaction
-      boolean filtered = controller.applyFilter(filter);
+      boolean filtered = controller.applyFilter();
       
       if (!filtered) {
         JOptionPane.showMessageDialog(view, "Invalid filter amount or category entered");
